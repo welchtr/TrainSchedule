@@ -28,6 +28,8 @@ $("#add-train-btn").on("click", function(event) {
     var firstTrain = moment($("#first-train-input").val().trim(), "HH:mm").subtract(1, "years").format("X");;
     var trainFrequency = $("#frequency-input").val().trim();
 
+    console.log("trainDestination", trainDestination);
+
     // Creates local "temporary" object for holding train data
 var newTrain = {
   name: trainName,
@@ -62,7 +64,7 @@ database.ref().on("child_added", function(childSnapshot) {
 
   // Store everything into a variable.
   var trainName = childSnapshot.val().name;
-  var trainDestination = childSnapshot.val().destionation;
+  var trainDestination = childSnapshot.val().destination;
   var firstTrain = childSnapshot.val().firstTrainTime;
   var trainFrequency = childSnapshot.val().frequency;
 
