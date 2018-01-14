@@ -15,7 +15,7 @@
  var trainDestination = "";
  var firstTrain = "";
  var trainFrequency = "";
- var nextTrain ="";
+ var nextTrain = "";
  var minutesAway = "";
 
   // 2. Button for adding Train
@@ -95,10 +95,13 @@ database.ref().on("child_added", function(childSnapshot) {
   var newMinutesAway = childSnapshot.val().frequency - tRemainder;
   console.log("MINUTES TILL TRAIN: " + newMinutesAway);
  console.log(typeof newMinutesAway)
-  // Next Train
-  var nextTrain = moment().add(minutesAway, "minutes");
-  console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
-  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td><td>" + nextTrain + "</td><td>"+ newMinutesAway +"</td></tr>");
+  // Next Train
+  var nextTrain = moment().add(newMinutesAway, "minutes");
+  var nextArrival = moment(nextTrain).format("h:mm");
+  // console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
+  console.log(nextArrival);
+
+  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td><td>" + nextArrival + "</td><td>"+ newMinutesAway +"</td></tr>");
 
   });
